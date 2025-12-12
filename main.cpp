@@ -107,25 +107,22 @@ int main() {
         }
 
         else if (choice == 4) {
-            cout << "=== Word Tic -Tac -Toe ===" << endl;
+            cout << "=== Word Tic-Tac-Toe ===" << endl;
+
             WordTTT_Board* board = new WordTTT_Board();
             WordTTT_UI* ui = new WordTTT_UI();
-            string name1, name2;
-            cout << "Enter Player 1 name: ";
-            cin >> name1;
-            cout << "Enter Player 2 name: ";
-            cin >> name2;
-            Player<char>* players[2];
-            players[0] = new Player<char>(name1, 'A', PlayerType::HUMAN);
-            players[1] = new Player<char>(name2, 'B', PlayerType::HUMAN);
-            players[0]->set_board_ptr(board);
-            players[1]->set_board_ptr(board);
+
+            // FIXED: Use setup_players() to allow AI selection
+            Player<char>** players = ui->setup_players();
+
             GameManager<char> gameManager(board, players, ui);
             gameManager.run();
+
             delete board;
             delete ui;
             delete players[0];
             delete players[1];
+            delete[] players;
         }
 
         else if (choice == 5) {
@@ -229,7 +226,7 @@ int main() {
             game.run();
             delete[] players;
         }
-       
+
 
         else if (choice == 13) {
             MemoryTTT_UI ui;
