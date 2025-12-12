@@ -34,26 +34,35 @@ int main() {
         cout << "\n=============================\n";
         cout << " FCAI Game Hub Menu \n";
         cout << "=============================\n";
-        cout << "1.SUS\n";
-        cout << "2.Four-in-a-Row \n";
-        cout << "3.5 x 5 Tic-Tac-Toe \n";
-        cout << "4.Word Tic-Tac-Toe\n";
-        cout << "5.Misere Tic-Tac-Toe\n";
-        cout << "6.Diamond Tic-Tac-Toe\n";
-        cout << "7.4 x 4 Tic-Tac-Toe\n";
-        cout << "8.Pyramid Tic-Tac-Toe\n";
-        cout << "0.Classic Tic-Tac-Toe (X-O)\n";
-        cout << "9.Numerical Tic-Tac-Toe (Sum = 15)\n";
-        cout << "10.Obstacles Tic-Tac-Toe \n";
-        cout << "11.Infinity Tic-Tac-Toe \n";
-        cout << "12.Ultimate Tic-Tac-Toe \n";
-        cout << "13.Memory Tic-Tac-Toe \n";
-        cout << "14.Exit\n";
+        cout << "0. Classic Tic-Tac-Toe (X-O)\n";
+        cout << "1. SUS Game\n";
+        cout << "2. Four-in-a-Row \n";
+        cout << "3. 5 x 5 Tic-Tac-Toe \n";
+        cout << "4. Word Tic-Tac-Toe\n";
+        cout << "5. Misere Tic-Tac-Toe\n";
+        cout << "6. Diamond Tic-Tac-Toe\n";
+        cout << "7. 4 x 4 Tic-Tac-Toe\n";
+        cout << "8. Pyramid Tic-Tac-Toe\n";
+        cout << "9. Numerical Tic-Tac-Toe (Sum = 15)\n";
+        cout << "10. Obstacles Tic-Tac-Toe \n";
+        cout << "11. Infinity Tic-Tac-Toe \n";
+        cout << "12. Ultimate Tic-Tac-Toe \n";
+        cout << "13. Memory Tic-Tac-Toe \n";
+        cout << "14. Exit\n";
         cout << "=============================\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
-        if (choice == 1) {
+        if (choice == 0) {
+            XO_UI ui;
+            Player<char>** players = ui.setup_players();
+            X_O_Board board;
+            GameManager<char> game(&board, players, &ui);
+            game.run();
+            delete[] players;
+        }
+
+        else if (choice == 1) {
             SUS_UI ui;
             Player<char>** players = ui.setup_players();
 
@@ -68,6 +77,7 @@ int main() {
             for (int i = 0; i < 2; ++i) delete players[i];
             delete[] players;
         }
+
         else if (choice == 2) {
             XO4R_UI ui;
             Player<char>** players = ui.setup_players();
@@ -79,6 +89,7 @@ int main() {
             GameManager<char> game(board, players, &ui);
             game.run();
         }
+
         else if (choice == 3) {
             cout << "=== 5x5 Tic Tac Toe ===" << endl;
 
@@ -94,6 +105,7 @@ int main() {
             delete players[1];
             delete[] players;
         }
+
         else if (choice == 4) {
             cout << "=== Word Tic -Tac -Toe ===" << endl;
             WordTTT_Board* board = new WordTTT_Board();
@@ -115,6 +127,7 @@ int main() {
             delete players[0];
             delete players[1];
         }
+
         else if (choice == 5) {
             MisereTTT_UI ui;
             Player<char>** players = ui.setup_players();
@@ -123,6 +136,7 @@ int main() {
             game.run();
             delete[] players;
         }
+
         else if (choice == 6) {
             DiamondTTT_UI ui;
             Player<char>** players = ui.setup_players();
@@ -131,6 +145,7 @@ int main() {
             game.run();
             delete[] players;
         }
+
         else if (choice == 7) {
             cout << "=== 4x4 Moving Tic Tac Toe ===" << endl;
 
@@ -167,14 +182,7 @@ int main() {
             delete[] players;
 
         }
-        else if (choice == 0) {
-            XO_UI ui;
-            Player<char>** players = ui.setup_players();
-            X_O_Board board;
-            GameManager<char> game(&board, players, &ui);
-            game.run();
-            delete[] players;
-        }
+
         else if (choice == 9) {
             NumTTT_UI ui;
             Player<int>** players = ui.setup_players();
@@ -183,6 +191,7 @@ int main() {
             game.run();
             delete[] players;
         }
+
         else if (choice == 10) {
             cout << "=== Obstacles Tic Tac Toe ===\n";
 
@@ -201,6 +210,7 @@ int main() {
             delete[] players;
 
         }
+
         else if (choice == 11) {
             InfinityTTT_UI ui;
             Player<char>** players = ui.setup_players();
@@ -209,6 +219,7 @@ int main() {
             game.run();
             delete[] players;
         }
+
         else if (choice == 12) {
             cout << "=== Ultimate Tic-Tac-Toe ===\n";
             UltimateTTT_UI ui;
@@ -227,10 +238,12 @@ int main() {
             GameManager<char> game(&board, players, &ui);
             game.run();
         }
+
         else if (choice == 14) {
             cout << "Goodbye!\n";
             break;
         }
+
         else {
             cout << "Invalid choice! Try again.\n";
         }
@@ -238,13 +251,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
