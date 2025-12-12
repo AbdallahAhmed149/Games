@@ -1,4 +1,4 @@
-﻿#include "WordTTT_UI.h"
+#include "WordTTT_UI.h"
 #include "WordTTT_SmartAI.h" // Include AI header
 #include <iostream>
 #include <cctype>
@@ -7,7 +7,8 @@
 using namespace std;
 
 WordTTT_UI::WordTTT_UI() : UI("Welcome to Word Tic-Tac-Toe!", 3) {
-    srand(time(0));
+    // FIXED: Static cast to avoid C4244 warning
+    srand(static_cast<unsigned int>(time(0)));
 }
 
 Player<char>* WordTTT_UI::create_player(string& name, char symbol, PlayerType type) {
@@ -39,7 +40,6 @@ Move<char>* WordTTT_UI::get_move(Player<char>* player) {
         Board<char>* gameBoard = player->get_board_ptr();
         vector<vector<char>> boardMatrix = gameBoard->get_board_matrix();
         // ... (Random logic as before)
-        // For brevity, assuming fallback is rare if setup_players is fixed
         return nullptr;
     }
 }
