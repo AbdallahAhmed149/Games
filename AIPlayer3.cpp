@@ -10,12 +10,14 @@ using namespace std;
 TTC5_AI_Player::TTC5_AI_Player(string name, char symbol, PlayerType type)
     : Player<char>(name, symbol, type), difficulty(2) {
     opponentSymbol = (symbol == 'X') ? 'O' : 'X';
-    srand(time(0));
+    // FIXED: Static cast to avoid C4244 warning
+    srand(static_cast<unsigned int>(time(0)));
 }
 TTC5_AI_Player::TTC5_AI_Player(char symbol, char opponent, int diff, string name)
     : Player<char>(name, symbol, PlayerType::AI),
     opponentSymbol(opponent), difficulty(diff) {
-    srand(time(0));
+    // FIXED: Static cast to avoid C4244 warning
+    srand(static_cast<unsigned int>(time(0)));
 }
 
 int TTC5_AI_Player::evaluateMove(TTC5_Board& board, int x, int y) {
@@ -99,12 +101,6 @@ void TTC5_AI_Player::get_move(TTC5_Board& board, int& x, int& y) {
         return;
     }
 
-    // Logic for difficulty...
-    // (Existing logic preserved below, just ensure class name context is correct)
-
-    // ... [Rest of logic same as original file, just ensure standard C++ compatibility]
-
-    // For brevity, here is the selection logic:
     vector<pair<int, pair<int, int>>> scoredMoves;
 
     for (const auto& cell : emptyCells) {
